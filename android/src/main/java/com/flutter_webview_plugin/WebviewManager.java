@@ -451,6 +451,12 @@ class WebviewManager {
         webView.loadUrl(url);
     }
 
+    void getAllCookies(MethodCall call, final MethodChannel.Result result){
+        String url = call.argument("url");
+        CookieManager cookieManager = CookieManager.getInstance();
+        String cookieStr = cookieManager.getCookie(url);
+        result.success(cookieStr);
+    }
     void reloadUrl(String url, Map<String, String> headers) {
         webView.loadUrl(url, headers);
     }

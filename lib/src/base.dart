@@ -238,6 +238,12 @@ class FlutterWebviewPlugin {
     await _channel.invokeMethod('close');
   }
 
+  ///Get All Session cookies
+  Future<String> getAllCookies(String url) async {
+    final res = await _channel.invokeMethod('getAllCookies', {'url': url});
+    return res;
+  }
+
   /// Reloads the WebView.
   Future<Null> reload() async => await _channel.invokeMethod('reload');
 

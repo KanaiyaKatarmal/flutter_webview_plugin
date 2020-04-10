@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
@@ -70,7 +71,8 @@ class MyApp extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.autorenew),
                     onPressed: () {
-                      flutterWebViewPlugin.reload();
+                      //flutterWebViewPlugin.reload();
+                      _getAllCookies();
                     },
                   ),
                 ],
@@ -80,6 +82,16 @@ class MyApp extends StatelessWidget {
         },
       },
     );
+
+
+  }
+  Future<Null> _getAllCookies() async {
+    try {
+      final String result = await flutterWebViewPlugin.getAllCookies("https://www.instagram.com");
+      print(result);
+    } on PlatformException catch (e) {
+      print(e.message);
+    }
   }
 }
 
